@@ -1,5 +1,6 @@
 from Relogio import *
 
+
 def main():
     relogio = Relogio.inicia()
     relogio.calcula()
