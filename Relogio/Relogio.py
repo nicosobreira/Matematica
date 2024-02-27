@@ -1,4 +1,3 @@
-from icecream import ic
 from lib.utils import *
 
 
@@ -23,7 +22,8 @@ class Relogio:
         return cls(hora, min)
 
     def calcula(self):
-        pos_ponteiro_min, _ = divmod(self.min, 5)
+        # Só funciona se os minutos forem divisíveis por 5
+        pos_ponteiro_min = self.min / 5
 
         # Converte 24-h para 12-h
         if self.hora > 12:
@@ -33,7 +33,7 @@ class Relogio:
 
         # Calcula quantas partes existem entre os ponteiros
         # Essas partes são entre os números do relógio
-        quantas_partes = abs((pos_ponteiro_hora - pos_ponteiro_min))
+        quantas_partes = pos_ponteiro_hora - pos_ponteiro_min
 
         # Os minutos "andam" e junto as horas também
         # É preciso calcular essa diferença
