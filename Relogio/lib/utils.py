@@ -2,6 +2,7 @@ from lib.strings import centro, errorMessage
 
 
 def pergunta(mensagem="", tipo=str):
+    tipo_str = ""
     if tipo == str:
         tipo_str = "str"
     elif tipo == int:
@@ -16,7 +17,7 @@ def pergunta(mensagem="", tipo=str):
         try:
             resposta = tipo(resposta)
         except ValueError:
-            errorMessage(f"Digite uma resposta {tipo_str}!")
+            errorMessage(f"Digite uma resposta do tipo{tipo_str}!")
         else:
             return resposta
 
@@ -26,10 +27,10 @@ def clear():
     from time import sleep
 
     sleep(0.2)
-    if name == 'posix':  # For Unix/Linux/Mac
-        system('clear')
-    elif name == 'nt':  # For Windows
-        system('cls')
+    if name == "posix":  # For Unix/Linux/Mac
+        system("clear")
+    elif name == "nt":  # For Windows
+        system("cls")
     else:
         pass
 
