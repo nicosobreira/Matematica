@@ -1,0 +1,2 @@
+# Progressao
+ Cria progressões aritméticas
