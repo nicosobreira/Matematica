@@ -9,18 +9,24 @@ MENU = {
 }
 
 
-def pergunta(mensagem="", tipo=str):
+def pergunta(mensagem="", tipo=str, ignora=""):
     if tipo == str:
         tipo_str = "str"
+        tipo_value = ""
     elif tipo == int:
         tipo_str = "int"
+        tipo_value = 0
     elif tipo == float:
         tipo_str = "float"
+        tipo_value = 0
     elif tipo == bool:
         tipo_str = "bool"
+        tipo_value = None
     while True:
         print(f"{mensagem}?")
         resposta = input(">> ")
+        if resposta == ignora:
+            return tipo_value
         try:
             resposta = tipo(resposta)
         except ValueError:
@@ -34,10 +40,10 @@ def clear():
     from time import sleep
 
     sleep(0.2)
-    if name == 'posix':  # For Unix/Linux/Mac
-        system('clear')
-    elif name == 'nt':  # For Windows
-        system('cls')
+    if name == "posix":  # For Unix/Linux/Mac
+        system("clear")
+    elif name == "nt":  # For Windows
+        system("cls")
     else:
         pass
 

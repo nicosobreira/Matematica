@@ -3,18 +3,31 @@ from lib.strings import *
 
 
 class Progressao:
-
-    def __init__(self, termo: float, razao: float):
-        self.termo = termo
+    def __init__(self, termo_1: dict, termo_2: dict, razao: float):
+        self.termo_1 = termo_1
+        self.termo_2 = termo_2
         self.razao = razao
-        self.progressao = [self.termo]
+        self.progressao = []
         self.formula = ""
 
     @classmethod
     def novo(cls):
-        termo = pergunta("Qual é o termo", float)
-        razao = pergunta("Qual é a razão", float)
-        return cls(termo, razao)
+        def pergunta_separavel(perg="", sep=" ", ignora="") -> dict:
+            while True:
+                print(f"{perg}?")
+                resposta = input(">> ")
+                if resposta == ignora:
+                    return {"posição": 0, "valor": 0}
+                pos, valor = resposta.split(sep=sep)
+                return {"posição": pos, "valor": valor}
+
+        while True:
+            print("Se o valor não existir digite ENTER")
+            print("Digite: posição <ESPAÇO> valor")
+            termo_1 = pergunta_separavel("Digite 1 texto qualquer")
+            termo_2 = pergunta_separavel("Digite outro termo qualquer")
+            razao = pergunta("Qual é a razão: ")
+            return cls(termo_1, termo_2, razao)
 
     def cria(self, maximo=100, round_num=2):
         num = self.termo
@@ -38,8 +51,7 @@ class Progressao:
                 print()
                 c = 0
             else:
-                print(
-                    f" {colors(sep, color['color'], style=color['style'])} ", end="")
+                print(f" {colors(sep, color['color'], style=color['style'])} ", end="")
         print()
 
     def descobre_elemento(self):
@@ -64,7 +76,13 @@ class Progressao:
         self.formula = f"{razao_str}{simbolo} {termo_sub_razao_str}"
 
     def title(self):
-        def se_não_existir_faça(op_1, op_2="None", type=str, end="\n", color={"color": "None", "style": "Dark"}):
+        def se_não_existir_faça(
+            op_1,
+            op_2="None",
+            type=str,
+            end="\n",
+            color={"color": "None", "style": "Dark"},
+        ):
             if type == str:
                 type_mode = ""
             elif type == int or type == float:
@@ -74,7 +92,9 @@ class Progressao:
 
             if op_1 == type_mode:
                 print(
-                    f" {colors(str(op_2), color['color'], style=color['style'])}", end="")
+                    f" {colors(str(op_2), color['color'], style=color['style'])}",
+                    end="",
+                )
             else:
                 print(f" {op_1}", end="")
             print(end=end)
